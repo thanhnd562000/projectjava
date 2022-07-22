@@ -17,7 +17,8 @@ import { FooterComponent } from './features/footer/footer.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+  
   ],
   providers: [ProductService],
   bootstrap: [AppComponent]
