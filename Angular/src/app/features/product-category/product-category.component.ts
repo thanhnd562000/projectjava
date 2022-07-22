@@ -11,13 +11,16 @@ export class ProductCategoryComponent implements OnInit {
   productCategories: ProductCategory[];
   constructor(private productServices: ProductService) {}
 
-  ngOnInit(): void {
+  ngOnInit() {
     this.listProductCategories();
   }
   listProductCategories() {
-    this.productServices.getProductCategories().subscribe((data: any) => {
-      console.log('Product categories' + JSON.stringify(data));
-      this.productCategories = data;
-    });
+ 
+    this.productServices.getProductCategories().subscribe(
+      data => {
+        //console.log('Product Categories=' + JSON.stringify(data));
+        this.productCategories = data;
+      }
+    );
   }
 }

@@ -16,25 +16,28 @@ export class ProductListComponent implements OnInit {
     private route: ActivatedRoute
   ) {}
 
-  ngOnInit(): void {
-    this.route.paramMap.subscribe(()=>{
-      this.ListProducts();
-    })
-   
+  ngOnInit() {
+    this.route.paramMap.subscribe(() => {
+      this.listProducts();
+    });
   }
-  ListProducts() {
+  listProducts() {
     //
-    const hasCategoryId:boolean=this.route.snapshot.paramMap.has('id');
+
+    const hasCategoryId: boolean = this.route.snapshot.params['id'];
    if(hasCategoryId)
    {
-    this.currentCategoryId=+this.route.snapshot.paramMap.has('id');
+    this.currentCategoryId=+ this.route.snapshot.params['id'];
    }
    else{
     this.currentCategoryId=1;
    }
 
-    this.productServices.getProductList(this.currentCategoryId).subscribe((res) => {
-      this.products = res;
-    });
+   this.productServices.getProductList(this.currentCategoryId).subscribe(
+    data => {
+      this.products = data;
+      console.log(this.products);
+    }
+  )
   }
 }
