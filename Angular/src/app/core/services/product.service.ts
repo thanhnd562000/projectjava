@@ -28,13 +28,14 @@ export class ProductService {
       map(response => response._embedded.productCategory)
     );
   }
-  searchProducts(theKeyword:string):Observable<Product[]>
-  {
+  searchProducts(theKeyword: string): Observable<Product[]> {
     const searchUrl = `${this.baseUrl}/search/findByNameContaining?name=${theKeyword}`;
-
     return this.GetProducts(searchUrl);
   }
-
+  getProduc(theProductId: number): Observable<Product> {
+    const productUrl = `${this.baseUrl}/${theProductId}`;
+    return this.httpClient.get<Product>(productUrl);
+  }
 
   private GetProducts(searchUrl: string): Observable<Product[]> {
     return this.httpClient.get<GetResponseProducts>(searchUrl).pipe(

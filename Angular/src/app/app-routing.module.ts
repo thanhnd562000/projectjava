@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { ProductDetailComponent } from './features/product-detail/product-detail.component';
 import { ProductListComponent } from './features/product-list/product-list.component';
 import { SearchComponent } from './features/search/search.component';
 
@@ -7,6 +8,7 @@ const routes: Routes = [
 
   { path: '', redirectTo: 'products', pathMatch: 'full' },
   {path:'search/:keyword',component:ProductListComponent},
+  {path:'products/:id',component:ProductDetailComponent},
   { path: 'products', component: ProductListComponent },
   { path: 'category/:id', component: ProductListComponent },
   { path: 'category', component: ProductListComponent },
