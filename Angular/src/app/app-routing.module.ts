@@ -6,7 +6,7 @@ import { SearchComponent } from './features/search/search.component';
 const routes: Routes = [
 
   { path: '', redirectTo: 'products', pathMatch: 'full' },
-  {path:'search/:keyword',component:SearchComponent},
+  {path:'search/:keyword',component:ProductListComponent},
   { path: 'products', component: ProductListComponent },
   { path: 'category/:id', component: ProductListComponent },
   { path: 'category', component: ProductListComponent },

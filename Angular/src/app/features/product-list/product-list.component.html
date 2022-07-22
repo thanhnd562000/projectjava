@@ -16,6 +16,10 @@
                     </div>
 
                 </div>
+                <!-- Kiểm tra nếu sản phẩm không tồn tại in thông báo-->
+                <div *ngIf="products?.length==0" class="alert alert-warning col-md-12" role="alert">
+                    Không có sản phẩm
+                </div>
             </div>
         </div>
     </div>
