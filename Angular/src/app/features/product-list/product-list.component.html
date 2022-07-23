@@ -16,7 +16,7 @@
                             <h1>{{ items.name }}</h1>
                         </a>
                         <div class="price">{{items.unitPrice| number: '3.0'}}</div>
-                        <a href="#" class="primary-btn">Add to cart</a>
+                        <button (click)="addToCart(items)"  class="btn btn-primary btn-sm">Add to cart</button>
                     </div>
 
                 </div>

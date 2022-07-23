@@ -11,6 +11,9 @@ import { ProductCategoryComponent } from './features/product-category/product-ca
 import { SearchComponent } from './features/search/search.component';
 import { ProductDetailComponent } from './features/product-detail/product-detail.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { CartStatusComponent } from './features/cart-status/cart-status.component';
+import { ToastrModule } from 'ngx-toastr';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -19,14 +22,21 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     FooterComponent,
     ProductCategoryComponent,
     SearchComponent,
-    ProductDetailComponent
+    ProductDetailComponent,
+    CartStatusComponent
   ],
   imports: [
     AppRoutingModule,
     BrowserModule,
     HttpClientModule,
-    NgbModule
-  
+    NgbModule,
+    ToastrModule.forRoot({
+      timeOut: 5000,
+      positionClass: 'toast-top-center',
+      preventDuplicates: true,
+      progressBar:true
+    }),
+    BrowserAnimationsModule,
   ],
   providers: [ProductService],
   bootstrap: [AppComponent]

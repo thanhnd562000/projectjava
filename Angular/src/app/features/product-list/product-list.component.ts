@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
+import { Cart } from 'src/app/common/cart.model';
 import { Product } from 'src/app/common/product';
+import { CartService } from 'src/app/core/services/cart.service';
 import { ProductService } from 'src/app/core/services/product.service';
 
 @Component({
@@ -13,14 +16,16 @@ export class ProductListComponent implements OnInit {
   currentCategoryId: number = 1;
   searchMode: boolean;
   previousCategoryId: number = 1;
-  previousKeyword: any =null;
+  previousKeyword: any = null;
   thePageNumber: number = 1;
   thePageSize: number = 8;
   theTotalElements: number = 0;
   constructor(
     private productServices: ProductService,
-    private route: ActivatedRoute
-  ) {}
+    private route: ActivatedRoute,
+    private cartService: CartService,
+    private toatstr :ToastrService
+  ) { }
 
   ngOnInit() {
     this.route.paramMap.subscribe(() => {
@@ -97,9 +102,17 @@ export class ProductListComponent implements OnInit {
       this.theTotalElements = data.page.totalElements;
     };
   }
+
   // updatePageSize(pageSize: number) {
   //   this.thePageSize = pageSize;
   //   this.thePageNumber = 1;
   //   this.listProducts();
   // }
+  addToCart(theProduct: Product) {
+    console.log(`Add to cart:${theProduct.name}`);
+    const theCartItem = new Cart(theProduct);
+
+    this.cartService.addToCart(theCartItem);
+    this.toatstr.success("Thêm sản phẩm thành công");
+  }
 }
