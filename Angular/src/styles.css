@@ -30,7 +30,9 @@ ul{
 button,input[type=button]{
     cursor:pointer
 }
-
+a{
+    text-decoration: none !important;
+}
 button:focus,input:focus{
     outline:0
 }
