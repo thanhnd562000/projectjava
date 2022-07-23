@@ -10,6 +10,7 @@ import { FooterComponent } from './features/footer/footer.component';
 import { ProductCategoryComponent } from './features/product-category/product-category.component';
 import { SearchComponent } from './features/search/search.component';
 import { ProductDetailComponent } from './features/product-detail/product-detail.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { ProductDetailComponent } from './features/product-detail/product-detail
     AppRoutingModule,
     BrowserModule,
     HttpClientModule,
+    NgbModule
   
   ],
   providers: [ProductService],
