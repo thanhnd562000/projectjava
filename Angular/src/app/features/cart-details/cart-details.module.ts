@@ -8,7 +8,7 @@ export const routes: Routes = [
   {path:'',component:CartDetailsComponent}
 ];
 @NgModule({
-  declarations: [CartDetailsComponent],
+  declarations: [],
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
