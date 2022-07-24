@@ -12,6 +12,13 @@ const routes: Routes = [
   { path: 'products', component: ProductListComponent },
   { path: 'category/:id', component: ProductListComponent },
   { path: 'category', component: ProductListComponent },
+  {
+    path: 'cart-detail',
+    loadChildren: () =>
+      import(
+        'src/app/features/cart-details/cart-details.module'
+      ).then((n) => n.CartDetailsModule),
+  },
   { path: '***', redirectTo:'products',pathMatch:'full' },
 ];
 

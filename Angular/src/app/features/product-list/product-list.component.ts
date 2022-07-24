@@ -62,9 +62,9 @@ export class ProductListComponent implements OnInit {
       )
       .subscribe(this.processResult);
     // now search for the products using keyword
-    this.productServices.searchProducts(theKeyword).subscribe((data) => {
-      this.products = data;
-    });
+    // this.productServices.searchProducts(theKeyword).subscribe((data) => {
+    //   this.products = data;
+    // });
   }
 
   handleListProducts() {
@@ -100,14 +100,15 @@ export class ProductListComponent implements OnInit {
       this.thePageNumber = data.page.number + 1;
       this.thePageSize = data.page.size;
       this.theTotalElements = data.page.totalElements;
+      console.log(data._embedded.products);
     };
   }
 
-  // updatePageSize(pageSize: number) {
-  //   this.thePageSize = pageSize;
-  //   this.thePageNumber = 1;
-  //   this.listProducts();
-  // }
+  updatePageSize(pageSize: any) {
+    this.thePageSize = pageSize;
+    this.thePageNumber = 1;
+    this.listProducts();
+  }
   addToCart(theProduct: Product) {
     console.log(`Add to cart:${theProduct.name}`);
     const theCartItem = new Cart(theProduct);
