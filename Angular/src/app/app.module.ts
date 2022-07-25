@@ -16,6 +16,7 @@ import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
 import { CartDetailsComponent } from './features/cart-details/cart-details.component';
+import { CheckOutComponent } from './features/check-out/check-out.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { CartDetailsComponent } from './features/cart-details/cart-details.compo
     SearchComponent,
     ProductDetailComponent,
     CartStatusComponent,
-    CartDetailsComponent
+    CartDetailsComponent,
+    CheckOutComponent
   ],
   imports: [
     AppRoutingModule,
@@ -34,7 +36,7 @@ import { CartDetailsComponent } from './features/cart-details/cart-details.compo
     HttpClientModule,
     NgbModule,
     ToastrModule.forRoot({
-      timeOut: 500,
+      timeOut: 2000,
       positionClass: 'toast-top-center',
       preventDuplicates: true,
       progressBar:true

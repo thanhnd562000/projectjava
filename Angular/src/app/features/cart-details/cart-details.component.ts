@@ -26,5 +26,16 @@ totalQuantity:number=0;
     )
     this.cartService.computeCartTotals();
    }
-
+   incrementQuantity(item:Cart)
+   {
+this.cartService.addToCart(item)
+   }
+   decrementQuantity(item:Cart)
+   {
+this.cartService.decrementQuantity(item)
+   }
+   remove(item:Cart)
+   {
+    this.cartService.remove(item);
+   }
 }

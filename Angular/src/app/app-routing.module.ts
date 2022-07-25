@@ -19,6 +19,13 @@ const routes: Routes = [
         'src/app/features/cart-details/cart-details.module'
       ).then((n) => n.CartDetailsModule),
   },
+  {
+    path: 'check-out',
+    loadChildren: () =>
+      import(
+        'src/app/features/check-out/check-out.module'
+      ).then((n) => n.CheckOutModule),
+  },
   { path: '***', redirectTo:'products',pathMatch:'full' },
 ];
 
