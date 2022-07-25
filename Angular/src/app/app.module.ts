@@ -14,7 +14,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { CartStatusComponent } from './features/cart-status/cart-status.component';
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CartDetailsComponent } from './features/cart-details/cart-details.component';
 import { CheckOutComponent } from './features/check-out/check-out.component';
 
@@ -42,7 +42,8 @@ import { CheckOutComponent } from './features/check-out/check-out.component';
       progressBar:true
     }),
     BrowserAnimationsModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [ProductService],
   bootstrap: [AppComponent]
