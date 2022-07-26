@@ -1,7 +1,7 @@
 <div class="main-content `">
     <div class="section-content section-content-p30 e-spc">
         <div class="container-fluid">
-            <form [formGroup]="checkoutFormGroup" (ngSubmit)="onSubmit()">
+            <form [autocomplete]="false" [formGroup]="checkoutFormGroup" (ngSubmit)="onSubmit()">
                 <!-- thông tin khách hàng -->
                 <div class="form-area" formGroupName="customer">
                     <h3>Customer</h3>
@@ -32,8 +32,8 @@
                         <div class="col-md-2"> <label>Country</label></div>
                         <div class="col-md-9">
                             <div class="input-space">
-                                <select formControlName="country">
-                                    <option>TO DO</option>
+                                <select formControlName="country" (change)="getStates('shippingAddress')">
+                                    <option *ngFor="let item of countries"  [ngValue]="item">{{item.name}}</option>
                                 </select>
                             </div>
                         </div>
@@ -61,9 +61,12 @@
                         <div class="col-md-2"> <label>State</label></div>
                         <div class="col-md-9">
                             <div class="input-space">
-                                <select formControlName="state" name="state"> 
-                                    <option>TO DO</option>
+                                <select formControlName="state">
+                                    <option *ngFor="let state of shippingAddressStates" [ngValue]="state">
+                                        {{ state.name }}
+                                    </option>
                                 </select>
+                              
                             </div>
                         </div>
                     </div>
@@ -97,7 +100,7 @@
                         <div class="col-md-9">
                             <div class="input-space">
                                 <select formControlName="country">
-                                    <option>TO DO</option>
+                                    <option *ngFor="let item of countries"  [ngValue]="item">{{item.name}}</option>
                                 </select>
                             </div>
                         </div>
@@ -126,7 +129,9 @@
                         <div class="col-md-9">
                             <div class="input-space">
                                 <select formControlName="state">
-                                    <option>TO DO</option>
+                                    <option *ngFor="let state of billingAddressStates" [ngValue]="state">
+                                        {{ state.name }}
+                                    </option>
                                 </select>
                             </div>
                         </div>
@@ -191,7 +196,7 @@
                         <div class="col-md-9">
                             <div class="input-space">
                                 <select formControlName="expirationMonth">
-                                    <option>TO DO</option>
+                                    <option *ngFor="let item of creditCardMonths">{{item}}</option>
                                 </select>
                             </div>
                         </div>
@@ -201,8 +206,8 @@
                         <div class="col-md-2"> <label>Expiration Year</label></div>
                         <div class="col-md-9">
                             <div class="input-space">
-                                <select formControlName="expirationYear">
-                                    <option>TO DO</option>
+                                <select formControlName="expirationYear" (change)="handleMonthAndYear()">
+                                    <option *ngFor="let item of credittCardYear" >{{item}}</option>
                                 </select>
                             </div>
                         </div>
