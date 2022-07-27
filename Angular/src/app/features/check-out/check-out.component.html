@@ -1,19 +1,47 @@
 <div class="main-content `">
     <div class="section-content section-content-p30 e-spc">
         <div class="container-fluid">
-            <form [autocomplete]="false" [formGroup]="checkoutFormGroup" (ngSubmit)="onSubmit()">
+            <form autocomplete="off" [formGroup]="checkoutFormGroup" (ngSubmit)="onSubmit()">
                 <!-- thông tin khách hàng -->
                 <div class="form-area" formGroupName="customer">
                     <h3>Customer</h3>
                     <div class="row">
                         <div class="col-md-6">
-                            <div class="input-space">
-                                <input type="text" formControlName="firstName" placeholder="First Name">
+                            <div class="input-space  ">
+                                <input type="text" formControlName="firstName" id="firstName" placeholder="First Name">
+
+                            </div>
+                            <div class="form-control-feedback"
+                                *ngIf="
+                                checkoutFormGroup.get('customer.firstName')?.errors &&
+                                (checkoutFormGroup.get('customer.firstName')?.dirty || checkoutFormGroup.get('customer.firstName')?.touched)">
+                                <p class="alert alert-danger"
+                                    *ngIf="checkoutFormGroup.get('customer.firstName')?.errors?.['required'] 
+                                || checkoutFormGroup.get('customer.firstName')?.errors?.['notOnlyWhitespace']">
+                                    FirstName required
+                                </p>
+                                <p class="alert alert-danger"
+                                    *ngIf="checkoutFormGroup.get('customer.firstName')?.errors?.['minlength']">
+                                    FirstName must be at least 2 characters long
+                                </p>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="input-space">
-                                <input type="text" formControlName="firstName" placeholder="Last Name">
+                                <input type="text" formControlName="lastName" placeholder="Last Name">
+                            </div>
+                            <div class="form-control-feedback"
+                                *ngIf="
+                            checkoutFormGroup.get('customer.lastName')?.errors &&
+                            (checkoutFormGroup.get('customer.lastName')?.dirty || checkoutFormGroup.get('customer.lastName')?.touched)">
+                                <p class="alert alert-danger"
+                                    *ngIf="checkoutFormGroup.get('customer.lastName')?.errors?.['required'] || checkoutFormGroup.get('customer.firstName')?.errors?.['notOnlyWhitespace']">
+                                    LastName required
+                                </p>
+                                <p class="alert alert-danger"
+                                    *ngIf="checkoutFormGroup.get('customer.lastName')?.errors?.['minlength']">
+                                    LastName must be at least 2 characters long
+                                </p>
                             </div>
                         </div>
                         <div class="clearfix"></div>
@@ -21,6 +49,19 @@
                             <div class="input-space">
                                 <input type="text" formControlName="email" placeholder="Email Address">
                             </div>
+                            <div class="form-control-feedback"
+                            *ngIf="
+                        checkoutFormGroup.get('customer.email')?.errors &&
+                        (checkoutFormGroup.get('customer.email')?.dirty || checkoutFormGroup.get('customer.email')?.touched)">
+                            <p class="alert alert-danger"
+                                *ngIf="checkoutFormGroup.get('customer.email')?.errors?.['required'] || checkoutFormGroup.get('customer.firstName')?.errors?.['notOnlyWhitespace']">
+                                Email required
+                            </p>
+                            <p class="alert alert-danger"
+                                *ngIf="checkoutFormGroup.get('customer.email')?.errors?.['pattern']">
+                                Email invalidate
+                            </p>
+                        </div>
                         </div>
                     </div>
                 </div>
@@ -33,7 +74,7 @@
                         <div class="col-md-9">
                             <div class="input-space">
                                 <select formControlName="country" (change)="getStates('shippingAddress')">
-                                    <option *ngFor="let item of countries"  [ngValue]="item">{{item.name}}</option>
+                                    <option *ngFor="let item of countries" [ngValue]="item">{{item.name}}</option>
                                 </select>
                             </div>
                         </div>
@@ -52,7 +93,7 @@
                         <div class="col-md-2"> <label>City</label></div>
                         <div class="col-md-9">
                             <div class="input-space">
-                                <input formControlName="city" name="city"type="text">
+                                <input formControlName="city" name="city" type="text">
                             </div>
                         </div>
                     </div>
@@ -66,7 +107,7 @@
                                         {{ state.name }}
                                     </option>
                                 </select>
-                              
+
                             </div>
                         </div>
                     </div>
@@ -100,7 +141,7 @@
                         <div class="col-md-9">
                             <div class="input-space">
                                 <select formControlName="country">
-                                    <option *ngFor="let item of countries"  [ngValue]="item">{{item.name}}</option>
+                                    <option *ngFor="let item of countries" [ngValue]="item">{{item.name}}</option>
                                 </select>
                             </div>
                         </div>
@@ -207,7 +248,7 @@
                         <div class="col-md-9">
                             <div class="input-space">
                                 <select formControlName="expirationYear" (change)="handleMonthAndYear()">
-                                    <option *ngFor="let item of credittCardYear" >{{item}}</option>
+                                    <option *ngFor="let item of credittCardYear">{{item}}</option>
                                 </select>
                             </div>
                         </div>

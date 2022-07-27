@@ -3,6 +3,7 @@ import { EmailValidator, FormBuilder, FormControl, FormGroup, Validators } from 
 import { Country } from 'src/app/common/country.model';
 import { State } from 'src/app/common/state.model';
 import { CheckformService } from 'src/app/core/services/checkform.service';
+import { FormValidater } from 'src/app/core/validater/form-validater';
 
 @Component({
   selector: 'app-check-out',
@@ -23,14 +24,14 @@ export class CheckOutComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private checkFormService: CheckformService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.checkoutFormGroup = this.formBuilder.group({
       customer: this.formBuilder.group({
-        firstName: new FormControl('',[Validators.required]),
-        lastName: [''],
-        email: new FormControl('',[Validators.required,Validators.email]),
+        firstName: new FormControl('', [Validators.required, Validators.minLength(2),FormValidater.notOnlyWhitespace]),
+        lastName: new FormControl('', [Validators.required, Validators.minLength(2),FormValidater.notOnlyWhitespace]),
+        email: new FormControl('', [Validators.required, Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$")]),
       }),
       shippingAddress: this.formBuilder.group({
         street: [''],
@@ -66,11 +67,11 @@ export class CheckOutComponent implements OnInit {
     });
 
     this.checkFormService.getCoutries().subscribe(
-      data=>{
-        this.countries=data;
+      data => {
+        this.countries = data;
       }
     )
-    
+
   }
   getStates(formGroupName: string) {
 
@@ -79,13 +80,13 @@ export class CheckOutComponent implements OnInit {
     const countryCode = formGroup!.value.country.code;
     // const countryName = formGroup!.value.country.name;
 
-    
+
 
     this.checkFormService.getStates(countryCode).subscribe(
       data => {
 
         if (formGroupName === 'shippingAddress') {
-          this.shippingAddressStates = data; 
+          this.shippingAddressStates = data;
         }
         else {
           this.billingAddressStates = data;
@@ -97,21 +98,27 @@ export class CheckOutComponent implements OnInit {
     );
   }
   onSubmit() {
-    console.log(this.checkoutFormGroup.get('shippingAddress')?.value);
+    // console.log(this.checkoutFormGroup.get('shippingAddress')?.value);
+if(this.checkoutFormGroup.invalid)
+{
+  this.checkoutFormGroup.markAllAsTouched();
+}
   }
+
+ 
   copyShippingAddressToBillingAddress(even: any) {
     if (even.target.checked) {
       this.checkoutFormGroup.controls['billingAddress'].setValue(
         this.checkoutFormGroup.controls['shippingAddress'].value
       );
       //
-      this.billingAddressStates=this.shippingAddressStates;
+      this.billingAddressStates = this.shippingAddressStates;
     } else {
       this.checkoutFormGroup.controls['billingAddress'].reset();
-      this.billingAddressStates=[];
+      this.billingAddressStates = [];
     }
-    
-   
+
+
   }
   handleMonthAndYear() {
     const creditCardFormGroup = this.checkoutFormGroup.get('creditCard');
