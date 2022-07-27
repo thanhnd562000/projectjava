@@ -1,6 +1,7 @@
 package com.javasb.springbootecommerce.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -34,6 +35,7 @@ public class Country {
 
   //Tode: set up one-to-many with states
   @OneToMany(mappedBy = "country")
+  @JsonIgnore
   private List<State> states;
 
 }
