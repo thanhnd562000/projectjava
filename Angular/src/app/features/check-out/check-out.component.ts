@@ -34,11 +34,11 @@ export class CheckOutComponent implements OnInit {
         email: new FormControl('', [Validators.required, Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$")]),
       }),
       shippingAddress: this.formBuilder.group({
-        street: [''],
-        city: [''],
+        street:new FormControl('', [Validators.required, Validators.minLength(2),FormValidater.notOnlyWhitespace]),
+        city: new FormControl('', [Validators.required, Validators.minLength(2),FormValidater.notOnlyWhitespace]),
         state: [''],
         country: [''],
-        zipCode: [''],
+        zipCode: new FormControl('', [Validators.required, Validators.minLength(2),FormValidater.notOnlyWhitespace]),
       }),
       billingAddress: this.formBuilder.group({
         street: [''],

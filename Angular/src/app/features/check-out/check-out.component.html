@@ -15,8 +15,7 @@
                                 *ngIf="
                                 checkoutFormGroup.get('customer.firstName')?.errors &&
                                 (checkoutFormGroup.get('customer.firstName')?.dirty || checkoutFormGroup.get('customer.firstName')?.touched)">
-                                <p class="alert alert-danger"
-                                    *ngIf="checkoutFormGroup.get('customer.firstName')?.errors?.['required'] 
+                                <p class="alert alert-danger" *ngIf="checkoutFormGroup.get('customer.firstName')?.errors?.['required'] 
                                 || checkoutFormGroup.get('customer.firstName')?.errors?.['notOnlyWhitespace']">
                                     FirstName required
                                 </p>
@@ -50,18 +49,18 @@
                                 <input type="text" formControlName="email" placeholder="Email Address">
                             </div>
                             <div class="form-control-feedback"
-                            *ngIf="
+                                *ngIf="
                         checkoutFormGroup.get('customer.email')?.errors &&
                         (checkoutFormGroup.get('customer.email')?.dirty || checkoutFormGroup.get('customer.email')?.touched)">
-                            <p class="alert alert-danger"
-                                *ngIf="checkoutFormGroup.get('customer.email')?.errors?.['required'] || checkoutFormGroup.get('customer.firstName')?.errors?.['notOnlyWhitespace']">
-                                Email required
-                            </p>
-                            <p class="alert alert-danger"
-                                *ngIf="checkoutFormGroup.get('customer.email')?.errors?.['pattern']">
-                                Email invalidate
-                            </p>
-                        </div>
+                                <p class="alert alert-danger"
+                                    *ngIf="checkoutFormGroup.get('customer.email')?.errors?.['required'] ">
+                                    Email required
+                                </p>
+                                <p class="alert alert-danger"
+                                    *ngIf="checkoutFormGroup.get('customer.email')?.errors?.['pattern']">
+                                    Email invalidate
+                                </p>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -86,6 +85,19 @@
                             <div class="input-space">
                                 <input formControlName="street" name="street" type="text">
                             </div>
+                            <div class="form-control-feedback"
+                            *ngIf="
+                        checkoutFormGroup.get('shippingAddress.street')?.errors &&
+                        (checkoutFormGroup.get('shippingAddress.street')?.dirty || checkoutFormGroup.get('shippingAddress.street')?.touched)">
+                            <p class="alert alert-danger"
+                                *ngIf="checkoutFormGroup.get('shippingAddress.street')?.errors?.['required'] ">
+                                street required
+                            </p>
+                            <p class="alert alert-danger"
+                                *ngIf="checkoutFormGroup.get('shippingAddress.street')?.errors?.['minlength']">
+                                street must be at least 2 characters long
+                            </p>
+                        </div>
                         </div>
                     </div>
 
@@ -95,6 +107,7 @@
                             <div class="input-space">
                                 <input formControlName="city" name="city" type="text">
                             </div>
+                          
                         </div>
                     </div>
 
@@ -118,6 +131,7 @@
                             <div class="input-space">
                                 <input formControlName="zipCode" name="zipCode" type="text">
                             </div>
+                           
                         </div>
                     </div>
 
