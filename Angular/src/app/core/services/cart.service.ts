@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
-import { Subject } from 'rxjs';
+import { BehaviorSubject, Subject } from 'rxjs';
 import { Cart } from 'src/app/common/cart.model';
 
 @Injectable({
@@ -9,8 +9,8 @@ import { Cart } from 'src/app/common/cart.model';
 })
 export class CartService {
   cartItems: Cart[] = [];
-  totalPrice: Subject<number> = new Subject<number>();
-  totalQuantity: Subject<number> = new Subject<number>();
+  totalPrice: Subject<number> = new BehaviorSubject<number>(0);
+  totalQuantity: Subject<number> = new BehaviorSubject<number>(0.00);
   constructor(private httpClient: HttpClient, private toastr: ToastrService) {}
   addToCart(theCartItem: Cart) {
     let alreadyExistsInCart: boolean = false;
@@ -37,6 +37,7 @@ export class CartService {
 
     this.computeCartTotals();
   }
+
   computeCartTotals() {
     let totalPriceValue: number = 0;
     let totalQuantityValue: number = 0;
