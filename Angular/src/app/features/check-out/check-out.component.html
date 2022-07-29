@@ -2,7 +2,7 @@
   <div class="section-content section-content-p30 e-spc">
     <div class="container-fluid">
       <form
-        autocomplete="off"
+        
         [formGroup]="checkoutFormGroup"
         (ngSubmit)="onSubmit()"
       >
@@ -415,10 +415,13 @@
             <div class="col-md-9">
               <div class="input-space">
                 <input formControlName="nameOnCard" type="text" />
-                <div *ngIf="creditCardType?.invalid && (creditCardType?.dirty || creditCardType?.touched)" class="alert alert-danger mt-1">
-                    <div *ngIf="creditCardType?.errors?.['required']">
+                <div *ngIf="creditCardNameOnCard?.invalid && (creditCardNameOnCard?.dirty || creditCardNameOnCard?.touched)" class="alert alert-danger mt-1">
+                    <div *ngIf="creditCardNameOnCard?.errors?.['required']">
                         Credit card type is required
                     </div>
+                    <div *ngIf="creditCardNameOnCard?.errors?.['minlength']">
+                      Name must be at least 2 characters long
+                  </div>
                 </div>
               </div>
             </div>
@@ -429,15 +432,14 @@
             <div class="col-md-9">
               <div class="input-space">
                 <input formControlName="cardNumber" type="text" />
-                <div *ngIf="creditCardNameOnCard?.invalid && (creditCardNameOnCard?.dirty || creditCardNameOnCard?.touched)" class="alert alert-danger mt-1">
-                    <div *ngIf="creditCardNameOnCard?.errors?.['required'] || creditCardNameOnCard?.errors?.['notOnlyWhitespace']">
-                        Name is required
-                    </div>
-
-                    <div *ngIf="creditCardNameOnCard?.errors?.['minlength']">
-                        Name must be at least 2 characters long
-                    </div>
-                </div>
+                <div *ngIf="creditCardNumber?.invalid && (creditCardNumber?.dirty || creditCardNumber?.touched)" class="alert alert-danger mt-1">
+                  <div *ngIf="creditCardNumber?.errors?.['required']">
+                      Card number is required
+                  </div>
+                  <div *ngIf="creditCardNumber?.errors?.['pattern']">
+                      Card number must be 16 digits long
+                  </div>
+              </div>
               </div>
             </div>
           </div>

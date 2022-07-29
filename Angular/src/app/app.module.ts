@@ -17,6 +17,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CartDetailsComponent } from './features/cart-details/cart-details.component';
 import { CheckOutComponent } from './features/check-out/check-out.component';
+import { LoginComponent } from './features/login/login.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { CheckOutComponent } from './features/check-out/check-out.component';
     ProductDetailComponent,
     CartStatusComponent,
     CartDetailsComponent,
-    CheckOutComponent
+    CheckOutComponent,
+    LoginComponent
   ],
   imports: [
     AppRoutingModule,

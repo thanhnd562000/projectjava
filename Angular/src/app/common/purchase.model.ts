@@ -4,6 +4,7 @@ import { OrderItem } from './order-item.model';
 import { Order } from './order.model';
 
 export class Purchase {
+  orderTrackingNumber:string;
   customer: Customer;
   shippingAddress: Address;
   billingAddress: Address;
