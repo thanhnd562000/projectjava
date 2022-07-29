@@ -16,7 +16,7 @@ export class ProductListComponent implements OnInit {
   currentCategoryId: number = 1;
   searchMode: boolean;
   previousCategoryId: number = 1;
-  previousKeyword: any = null;
+  previousKeyword?: string ;
   thePageNumber: number = 1;
   thePageSize: number = 8;
   theTotalElements: number = 0;
@@ -44,27 +44,26 @@ export class ProductListComponent implements OnInit {
 
   handleSearchProducts() {
     const theKeyword: string = this.route.snapshot.paramMap.get('keyword')!;
-    //if we have a different keyword than previous
-    //then set the pagenumber=1;
-
     if (this.previousKeyword != theKeyword) {
       this.thePageNumber = 1;
     }
     this.previousKeyword = theKeyword;
-    console.log(
-      `previousKeyword=${this.previousKeyword}, thePageNumber=${this.thePageNumber}`
-    );
+    // console.log(
+    //   `previousKeyword=${this.previousKeyword}, thePageNumber=${this.thePageNumber}`
+    // );
     this.productServices
-      .searchProductPaginate(
+      .searchProductsPaginate(
         this.thePageNumber - 1,
         this.thePageSize,
         theKeyword
       )
-      .subscribe(this.processResult);
-    // now search for the products using keyword
-    // this.productServices.searchProducts(theKeyword).subscribe((data) => {
-    //   this.products = data;
-    // });
+      .subscribe(
+        this.processResult()
+      );
+    
+    this.productServices.searchProducts(theKeyword).subscribe((data) => {
+      this.products = data;
+    });
   }
 
   handleListProducts() {
@@ -81,9 +80,9 @@ export class ProductListComponent implements OnInit {
       this.thePageNumber = 1;
     }
     this.previousCategoryId = this.currentCategoryId;
-    console.log(
-      `currentCategoryId=${this.currentCategoryId}, thePageNumber=${this.thePageNumber}`
-    );
+    // console.log(
+    //   `currentCategoryId=${this.currentCategoryId}, thePageNumber=${this.thePageNumber}`
+    // );
 
     // now get the products for the given category id
     this.productServices
@@ -100,7 +99,7 @@ export class ProductListComponent implements OnInit {
       this.thePageNumber = data.page.number + 1;
       this.thePageSize = data.page.size;
       this.theTotalElements = data.page.totalElements;
-      console.log(data._embedded.products);
+      console.log(data);
     };
   }
 
@@ -110,7 +109,7 @@ export class ProductListComponent implements OnInit {
     this.listProducts();
   }
   addToCart(theProduct: Product) {
-    console.log(`Add to cart:${theProduct.name}`);
+    //console.log(`Add to cart:${theProduct.name}`);
     const theCartItem = new Cart(theProduct);
 
     this.cartService.addToCart(theCartItem);
