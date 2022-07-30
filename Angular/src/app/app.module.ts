@@ -18,6 +18,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CartDetailsComponent } from './features/cart-details/cart-details.component';
 import { CheckOutComponent } from './features/check-out/check-out.component';
 import { LoginComponent } from './features/login/login.component';
+import { LoginStatusComponent } from './features/login-status/login-status.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { LoginComponent } from './features/login/login.component';
     CartStatusComponent,
     CartDetailsComponent,
     CheckOutComponent,
-    LoginComponent
+    LoginComponent,
+    LoginStatusComponent,
   ],
   imports: [
     AppRoutingModule,
@@ -41,13 +43,13 @@ import { LoginComponent } from './features/login/login.component';
       timeOut: 2000,
       positionClass: 'toast-top-center',
       preventDuplicates: true,
-      progressBar:true
+      progressBar: true,
     }),
     BrowserAnimationsModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
   ],
   providers: [ProductService],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
