@@ -19,7 +19,23 @@ import { CartDetailsComponent } from './features/cart-details/cart-details.compo
 import { CheckOutComponent } from './features/check-out/check-out.component';
 import { LoginComponent } from './features/login/login.component';
 import { LoginStatusComponent } from './features/login-status/login-status.component';
+import{
+  OKTA_CONFIG,
+  OktaAuthModule,
+  OktaCallbackComponent
+} from '@okta/okta-angular';
+import myAppConfig from './config/my-app-config';
+import { Router } from '@angular/router';
 
+
+
+
+const oktaConfig =Object.assign({
+  onAuthRequired:(injector:any)=>{
+    const router =injector.get(Router);
+    router.navigate(['login']);
+  }
+},myAppConfig.oidc)
 @NgModule({
   declarations: [
     AppComponent,
@@ -48,8 +64,11 @@ import { LoginStatusComponent } from './features/login-status/login-status.compo
     BrowserAnimationsModule,
     FormsModule,
     ReactiveFormsModule,
+    OktaAuthModule
+    
+
   ],
-  providers: [ProductService],
+  providers: [ProductService,{provide:OKTA_CONFIG,useValue:oktaConfig}],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

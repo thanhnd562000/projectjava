@@ -10,7 +10,7 @@ import { OktaAuthService } from '@okta/okta-angular';
 export class LoginStatusComponent implements OnInit {
 
   isAuthenticated: boolean = true;
-  userFullName?: string;
+  userFullName?:string;
   constructor(private oktaAuthService: OktaAuthService) { }
 
   ngOnInit(): void {
@@ -30,6 +30,6 @@ export class LoginStatusComponent implements OnInit {
   }
   logout() {
   
-    this.oktaAuthService.signOut();
+  this.oktaAuthService.signOut();
   }
 }

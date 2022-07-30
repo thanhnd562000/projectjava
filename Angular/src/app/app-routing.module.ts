@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { OktaCallbackComponent } from '@okta/okta-angular';
 import { ProductDetailComponent } from './features/product-detail/product-detail.component';
 import { ProductListComponent } from './features/product-list/product-list.component';
 import { SearchComponent } from './features/search/search.component';
@@ -7,8 +8,8 @@ import { SearchComponent } from './features/search/search.component';
 const routes: Routes = [
 
   { path: '', redirectTo: 'products', pathMatch: 'full' },
-  {path:'search/:keyword',component:ProductListComponent},
-  {path:'products/:id',component:ProductDetailComponent},
+  { path: 'search/:keyword', component: ProductListComponent },
+  { path: 'products/:id', component: ProductDetailComponent },
   { path: 'products', component: ProductListComponent },
   { path: 'category/:id', component: ProductListComponent },
   { path: 'category', component: ProductListComponent },
@@ -26,11 +27,19 @@ const routes: Routes = [
         'src/app/features/check-out/check-out.module'
       ).then((n) => n.CheckOutModule),
   },
-  { path: '***', redirectTo:'products',pathMatch:'full' },
+  {
+    path: 'login',
+    loadChildren: () =>
+      import(
+        'src/app/features/login/login.module'
+      ).then((n) => n.LoginModule),
+  },
+  {path:'login/callback',component:OktaCallbackComponent},
+  { path: '***', redirectTo: 'products', pathMatch: 'full' },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }
