@@ -26,12 +26,13 @@ import{
 } from '@okta/okta-angular';
 import myAppConfig from './config/my-app-config';
 import { Router } from '@angular/router';
+import { MemberPagesComponent } from './features/member-pages/member-pages.component';
 
 
 
 
 const oktaConfig =Object.assign({
-  onAuthRequired:(injector:any)=>{
+  onAuthRequired:(oktaauth:any,injector:any)=>{
     const router =injector.get(Router);
     router.navigate(['login']);
   }
@@ -49,6 +50,7 @@ const oktaConfig =Object.assign({
     CheckOutComponent,
     LoginComponent,
     LoginStatusComponent,
+    MemberPagesComponent,
   ],
   imports: [
     AppRoutingModule,

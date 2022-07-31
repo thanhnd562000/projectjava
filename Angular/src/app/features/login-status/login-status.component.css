@@ -6,12 +6,11 @@ Css button
     right:10px;
     min-width:85px;
     color:#fff;
-    border:10px solid #205b8d;
     -webkit-border-radius:3px;
     -moz-border-radius:3px;
-    border-radius:0;
+    border-radius:20px;
     background:#205b8d;
-
+margin-right: 5px;
 }
 .login-status-header{
     display:-webkit-box;
@@ -20,9 +19,11 @@ Css button
     display:-ms-flexbox;
     display:flex
 }
-.login-status-info-user{
+.login-status-user-info{
     line-height:43px;
     border:1px;
+    margin-right: 20px;
+    margin-top: 10px;
     padding:0 17px;
     -webkit-border-radius:3px;
     -moz-border-radius:3px;

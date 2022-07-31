@@ -9,9 +9,20 @@ import { Cart } from 'src/app/common/cart.model';
 })
 export class CartService {
   cartItems: Cart[] = [];
+  storage: Storage = sessionStorage;
   totalPrice: Subject<number> = new BehaviorSubject<number>(0);
   totalQuantity: Subject<number> = new BehaviorSubject<number>(0.00);
-  constructor(private httpClient: HttpClient, private toastr: ToastrService) {}
+  constructor(private httpClient: HttpClient, private toastr: ToastrService) {
+    let data = JSON.parse(this.storage.getItem('cartItem')!);
+    if (data != null) {
+      this.cartItems = data;
+      this.computeCartTotals();
+    }
+  }
+  persistCartItem()
+  {
+    this.storage.setItem('cartItem',JSON.stringify(this.cartItems));
+  }
   addToCart(theCartItem: Cart) {
     let alreadyExistsInCart: boolean = false;
     let existingCartItem!: Cart | undefined;
@@ -37,7 +48,7 @@ export class CartService {
 
     this.computeCartTotals();
   }
-
+  
   computeCartTotals() {
     let totalPriceValue: number = 0;
     let totalQuantityValue: number = 0;
@@ -52,6 +63,7 @@ export class CartService {
     this.totalQuantity.next(totalQuantityValue);
 
     this.logCartData(totalPriceValue, totalQuantityValue);
+    this.persistCartItem();
   }
   logCartData(totalPriceValue: number, totalQuantityValue: number) {
     console.log('Contents of the cart');
@@ -91,4 +103,5 @@ export class CartService {
       this.computeCartTotals();
     }
   }
+
 }

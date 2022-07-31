@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { OktaCallbackComponent } from '@okta/okta-angular';
+import { OktaAuthGuard, OktaCallbackComponent } from '@okta/okta-angular';
+import { MemberPagesComponent } from './features/member-pages/member-pages.component';
 import { ProductDetailComponent } from './features/product-detail/product-detail.component';
 import { ProductListComponent } from './features/product-list/product-list.component';
 import { SearchComponent } from './features/search/search.component';
@@ -35,6 +36,7 @@ const routes: Routes = [
       ).then((n) => n.LoginModule),
   },
   {path:'login/callback',component:OktaCallbackComponent},
+  {path:'members',component:MemberPagesComponent,canActivate:[OktaAuthGuard]},
   { path: '***', redirectTo: 'products', pathMatch: 'full' },
 ];
 
