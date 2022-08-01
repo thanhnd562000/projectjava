@@ -3,14 +3,13 @@ Css button
 */
 .security-btn{
     position:relative;
-    right:10px;
-    min-width:85px;
+    right:0;
+    min-width:60px;
     color:#fff;
-    -webkit-border-radius:3px;
-    -moz-border-radius:3px;
-    border-radius:20px;
+    border:1px solid #205b8d;
+    border-radius:25px;
     background:#205b8d;
-margin-right: 5px;
+    margin-right: 10px;
 }
 .login-status-header{
     display:-webkit-box;

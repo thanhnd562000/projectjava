@@ -1,0 +1,35 @@
+<div class="main-content">
+    <div class="section-content section-content-p30">
+        <div class="container-fluid">
+            <table class="table  table-condensed" style="text-align: center">
+                <thead>
+                    <tr>
+                        <th scope="col">STT</th>
+                        <th scope="col">Mã đơn hàng</th>
+                        <th scope="col">Tổng tiền</th>
+                        <th scope="col">Số lượng</th>          
+                        <th scope="col">Ngày tạo</th>
+                     
+                        
+                    </tr>
+                </thead>
+                <tbody>
+            
+                    <tr *ngFor="let item of orderHistoryList;let i = index"
+                        style="text-align: center">
+                        <td>{{ i + 1 }}</td>
+                        <td>{{ item.orderTrackingNumber }}</td>
+                        <td>{{ item.totalPrice }}</td>
+                        <td>{{ item.totalQuantity }}</td>       
+                        <td>{{ item.dateCreated |date:'medium'}}</td>
+                       
+                    </tr>
+                </tbody>
+            
+            </table>
+        </div>
+    </div>
+</div>
+
+
+

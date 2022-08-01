@@ -27,6 +27,8 @@ import{
 import myAppConfig from './config/my-app-config';
 import { Router } from '@angular/router';
 import { MemberPagesComponent } from './features/member-pages/member-pages.component';
+import { OrderComponent } from './features/order/order.component';
+import { OrderhistoryComponent } from './features/orderhistory/orderhistory.component';
 
 
 
@@ -51,6 +53,8 @@ const oktaConfig =Object.assign({
     LoginComponent,
     LoginStatusComponent,
     MemberPagesComponent,
+    OrderComponent,
+    OrderhistoryComponent,
   ],
   imports: [
     AppRoutingModule,

@@ -29,6 +29,7 @@ export class CheckOutComponent implements OnInit {
   states: State[] = [];
   shippingAddressStates: State[] = [];
   billingAddressStates: State[] = [];
+  storage:Storage=sessionStorage;
   //
   credittCardYear: number[] = [];
   creditCardMonths: number[] = [];
@@ -42,6 +43,9 @@ export class CheckOutComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+
+    //lấy email người dùng 
+const theEmail =JSON.parse(this.storage.getItem('userEmail')!);
 
     //
     this.reviewCartDetails();
@@ -58,7 +62,7 @@ export class CheckOutComponent implements OnInit {
           Validators.minLength(2),
           FormValidater.notOnlyWhitespace,
         ]),
-        email: new FormControl('', [
+        email: new FormControl(theEmail, [
           Validators.required,
           Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,3}$'),
         ]),
