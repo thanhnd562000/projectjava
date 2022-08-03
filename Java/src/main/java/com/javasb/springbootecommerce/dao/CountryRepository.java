@@ -9,6 +9,6 @@ import org.springframework.data.rest.core.annotation.RepositoryRestResource;
  */
 
 @RepositoryRestResource(collectionResourceRel = "countries", path = "countries")
-public interface CounttryRepository extends JpaRepository<Country,Integer> {
+public interface CountryRepository extends JpaRepository<Country, Integer> {
 
 }

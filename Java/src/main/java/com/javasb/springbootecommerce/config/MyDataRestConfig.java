@@ -29,7 +29,7 @@ public class MyDataRestConfig implements RepositoryRestConfigurer {
 
   @Value("${allowed.origins}")
   private String[] theAllowedOrigins;
-  private EntityManager entityManager;
+  private final EntityManager entityManager;
 
   @Autowired
   public MyDataRestConfig(EntityManager theEntityManager) {
@@ -41,34 +41,32 @@ public class MyDataRestConfig implements RepositoryRestConfigurer {
       CorsRegistry cors) {
 
     RepositoryRestConfigurer.super.configureRepositoryRestConfiguration(config, cors);
-    HttpMethod[] theUnsupportedActions = {HttpMethod.PUT, HttpMethod.DELETE, HttpMethod.POST,HttpMethod.PATCH};
+    HttpMethod[] theUnsupportedActions = {HttpMethod.PUT, HttpMethod.DELETE, HttpMethod.POST, HttpMethod.PATCH};
     //disable Http method Product
-    httpDiasbleHttpMethod(Product.class, config, theUnsupportedActions);
-    httpDiasbleHttpMethod(ProductCategory.class, config, theUnsupportedActions);
-    httpDiasbleHttpMethod(Country.class, config, theUnsupportedActions);
-    httpDiasbleHttpMethod(State.class, config, theUnsupportedActions);
-    httpDiasbleHttpMethod(Order.class, config, theUnsupportedActions);
+    httpDisableHttpMethod(Product.class, config, theUnsupportedActions);
+    httpDisableHttpMethod(ProductCategory.class, config, theUnsupportedActions);
+    httpDisableHttpMethod(Country.class, config, theUnsupportedActions);
+    httpDisableHttpMethod(State.class, config, theUnsupportedActions);
+    httpDisableHttpMethod(Order.class, config, theUnsupportedActions);
     exposeIds(config);
     //configure core mapping
-    cors.addMapping(config.getBasePath()+"/**").allowedOrigins(theAllowedOrigins);
+    cors.addMapping(config.getBasePath() + "/**").allowedOrigins(theAllowedOrigins);
   }
 
-  private ExposureConfigurer httpDiasbleHttpMethod(Class theClass, RepositoryRestConfiguration config,
+  private ExposureConfigurer httpDisableHttpMethod(Class theClass, RepositoryRestConfiguration config,
       HttpMethod[] theUnsupportedActions) {
     return config.getExposureConfiguration()
         .forDomainType(theClass)
-        .withItemExposure((metdata, httpMethods) -> httpMethods.disable(theUnsupportedActions))
+        .withItemExposure((metadata, httpMethods) -> httpMethods.disable(theUnsupportedActions))
         .withCollectionExposure(
-            (metdata, httpMethods) -> httpMethods.disable(theUnsupportedActions));
+            (metadata, httpMethods) -> httpMethods.disable(theUnsupportedActions));
   }
 
   private void exposeIds(RepositoryRestConfiguration config) {
 
     Set<EntityType<?>> entities = entityManager.getMetamodel().getEntities();
 
-
     List <Class> entityClasses = new ArrayList<>();
-
 
     for (EntityType tempEntityType : entities) {
       entityClasses.add(tempEntityType.getJavaType());

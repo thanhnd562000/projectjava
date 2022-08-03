@@ -12,49 +12,46 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+/**
+ * checkout servie.
+ */
 @Service
 public class CheckoutServiceImpl implements CheckoutService {
 
-  private CustomerRepository customerRepository;
+  private final CustomerRepository customerRepository;
 
   @Autowired
   public CheckoutServiceImpl(CustomerRepository customerRepository) {
     this.customerRepository = customerRepository;
   }
+
   @Override
   @Transactional
   public PurchaseResponse placeOrder(Purchase purchase) {
 
     Order order = purchase.getOrder();
 
-
     String orderTrackingNumber = generateOrderTrackingNumber();
     order.setOrderTrackingNumber(orderTrackingNumber);
 
-
     Set<OrderItem> orderItems = purchase.getOrderItems();
-    orderItems.forEach(item -> order.add( item ));
-
+    orderItems.forEach(order::add);
 
     order.setBillingAddress(purchase.getBillingAddress());
     order.setShippingAddress(purchase.getShippingAddress());
 
-
     Customer customer = purchase.getCustomer();
 
-    //
-    String theEmail=customer.getEmail();
+    String theEmail = customer.getEmail();
 
-    Customer customerFromDb =customerRepository.findByEmail(theEmail);
+    Customer customerFromDb = customerRepository.findByEmail(theEmail);
 
     if (customerFromDb != null) {
       customer = customerFromDb;
     }
     customer.add(order);
 
-
     customerRepository.save(customer);
-
 
     return new PurchaseResponse(orderTrackingNumber);
   }

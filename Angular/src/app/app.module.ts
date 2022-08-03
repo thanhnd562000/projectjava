@@ -4,7 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ProductListComponent } from './features/product-list/product-list.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ProductService } from './core/services/product.service';
 import { FooterComponent } from './features/footer/footer.component';
 import { ProductCategoryComponent } from './features/product-category/product-category.component';
@@ -19,7 +19,7 @@ import { CartDetailsComponent } from './features/cart-details/cart-details.compo
 import { CheckOutComponent } from './features/check-out/check-out.component';
 import { LoginComponent } from './features/login/login.component';
 import { LoginStatusComponent } from './features/login-status/login-status.component';
-import{
+import {
   OKTA_CONFIG,
   OktaAuthModule,
   OktaCallbackComponent
@@ -29,16 +29,17 @@ import { Router } from '@angular/router';
 import { MemberPagesComponent } from './features/member-pages/member-pages.component';
 import { OrderComponent } from './features/order/order.component';
 import { OrderhistoryComponent } from './features/orderhistory/orderhistory.component';
+import { AuthInterceptorService } from './core/services/auth-interceptor.service';
 
 
 
 
-const oktaConfig =Object.assign({
-  onAuthRequired:(oktaauth:any,injector:any)=>{
-    const router =injector.get(Router);
+const oktaConfig = Object.assign({
+  onAuthRequired: (oktaauth: any, injector: any) => {
+    const router = injector.get(Router);
     router.navigate(['login']);
   }
-},myAppConfig.oidc)
+}, myAppConfig.oidc)
 @NgModule({
   declarations: [
     AppComponent,
@@ -71,10 +72,11 @@ const oktaConfig =Object.assign({
     FormsModule,
     ReactiveFormsModule,
     OktaAuthModule
-    
+
 
   ],
-  providers: [ProductService,{provide:OKTA_CONFIG,useValue:oktaConfig}],
+  providers: [ProductService, { provide: OKTA_CONFIG, useValue: oktaConfig },
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true }],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule { }

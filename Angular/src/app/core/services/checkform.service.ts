@@ -3,13 +3,14 @@ import { Injectable } from '@angular/core';
 import { map, Observable, of } from 'rxjs';
 import { Country } from 'src/app/common/country.model';
 import { State } from 'src/app/common/state.model';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class CheckformService {
-  private countriesUrl="http://localhost:8080/api/countries";
-  private stateUrl="http://localhost:8080/api/states";
+  private countriesUrl=  environment.shopApiUrl+"/countries";
+  private stateUrl=  environment.shopApiUrl+ "/states";
 
   constructor(private httpClient:HttpClient) {}
   getCreditCardMonths(startMonth: number): Observable<number[]> {

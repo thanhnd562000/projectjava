@@ -39,8 +39,7 @@ export class LoginComponent implements OnInit {
         throw error;
       }
     )
-    const token =  this.oktaAuthService.tokenManager.get;
-    console.log(token);
+   
     
   }
 }
